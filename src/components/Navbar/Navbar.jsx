@@ -10,6 +10,7 @@ const Navbar = ({ mode, setMode }) => {
           <ModeToggle />
           <Button
             size="sm"
+            variant="outline"
             onClick={() => (mode == "a" ? setMode("b") : setMode("a"))}
           >
             Switch
