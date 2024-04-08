@@ -90,7 +90,7 @@ export default function Tab({
   }
 
   return (
-    <div className="flex flex-col items-center space-x-1 rounded-md shadow-md p-2 mt-6 bg-background ">
+    <div className="flex flex-col items-center space-x-1 rounded-md shadow p-2 mt-6 bg-card text-card-foreground border hover:cursor-pointer">
       <div className="w-full flex justify-center items-center">
         {platformComponent}
         <h1 className="px-2 text-sm sm:text-md font-semibold text-muted-foreground hover:cursor-pointer hover:text-foreground">
