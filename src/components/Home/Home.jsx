@@ -40,7 +40,7 @@ export default function Home({ mode }) {
               <Tab
                 name={section.name}
                 username={section.username}
-                avatar={section.avatar}
+                platform={section.platform}
                 landing_page_link={section.landing_page_link}
                 profile_link={section.profile_link}
               />
@@ -54,7 +54,7 @@ export default function Home({ mode }) {
                 value={section.tag}
                 className="flex justify-between"
               >
-                <Tab2 name={section.name} avatar={section.avatar} landing_page_link={section.landing_page_link}/>
+                <Tab2 name={section.name} platform={section.platform} landing_page_link={section.landing_page_link}/>
               </TabsContent>
             ))}
           </div>
