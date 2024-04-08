@@ -11,7 +11,6 @@ export default function Home({ mode }) {
     setActiveTag(tag);
   };
 
-  // Filter sections based on the active tag
   const filteredSections = sections.filter(section => section.tag === activeTag);
 
   return (
