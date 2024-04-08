@@ -46,7 +46,7 @@ export default function Home({ mode }) {
             </TabsContent>
           ))}
         {mode === "b" && (
-          <div className="grid grid-cols-3 gap-4">
+          <div className="w-full sm:grid sm:grid-cols-3 sm:gap-4">
             {filteredSections.map((section) => (
               <TabsContent
                 key={section.name}

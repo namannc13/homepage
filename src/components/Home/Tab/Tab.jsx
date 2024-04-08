@@ -93,8 +93,8 @@ export default function Tab({
     <div className="flex flex-col items-center space-x-1 rounded-md shadow-md p-2 mt-6 bg-background ">
       <div className="w-full flex justify-center items-center">
         {platformComponent}
-        <h1 className="px-2 text-md font-semibold text-muted-foreground hover:cursor-pointer hover:text-foreground">
-          {name} - @{username}
+        <h1 className="px-2 text-sm sm:text-md font-semibold text-muted-foreground hover:cursor-pointer hover:text-foreground">
+          {name}
         </h1>
       </div>
       <div className="w-full flex mt-4 gap-4">

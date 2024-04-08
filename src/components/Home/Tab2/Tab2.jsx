@@ -72,7 +72,7 @@ export default function Tab2({ name, platform, landing_page_link }) {
     >
       {platformComponent}
 
-      <h1 className="px-2 text-md font-semibold text-muted-foreground hover:cursor-pointer hover:text-foreground">
+      <h1 className="px-2 text-md font-semibold text-muted-foreground hover:cursor-pointer hover:text-foreground text-center">
         {name}
       </h1>
     </div>
