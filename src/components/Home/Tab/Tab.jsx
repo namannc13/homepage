@@ -11,110 +11,118 @@ import {
   Mailbox,
   Code,
   Cat,
+  Barn,
+  TrashSimple,
 } from "@phosphor-icons/react";
-import { Button } from "@/components/ui/button";
 
-export default function Tab({
-  name,
-  username,
-  platform,
-  landing_page_link,
-  profile_link,
-}) {
-  const handleVisitLandingPage = () => {
-    window.location.href = landing_page_link;
+export default function Tab({ name, url, iconName, setUserLinks }) {
+  const handleVisitPage = () => {
+    window.location.href = url;
   };
 
-  const handleVisitProfilePage = () => {
-    window.location.href = profile_link;
+  const handleDeleteTab = async () => {
+    try {
+      const res = await fetch("/api/link/deleteLink", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name }),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+      setUserLinks((prev) => prev.filter((link) => link.name !== name));
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
-  let platformComponent;
+  let iconComponent;
 
-  switch (platform) {
+  switch (iconName) {
     case "github":
-      platformComponent = <GithubLogo size={24} weight="duotone" />;
+      iconComponent = <GithubLogo size={24} weight="duotone" />;
       break;
 
     case "twitter":
-      platformComponent = <TwitterLogo size={24} weight="duotone" />;
+      iconComponent = <TwitterLogo size={24} weight="duotone" />;
       break;
 
     case "youtube":
-      platformComponent = <YoutubeLogo size={24} weight="duotone" />;
+      iconComponent = <YoutubeLogo size={24} weight="duotone" />;
       break;
 
     case "pinterest":
-      platformComponent = <PinterestLogo size={24} weight="duotone" />;
+      iconComponent = <PinterestLogo size={24} weight="duotone" />;
       break;
 
     case "instagram":
-      platformComponent = <InstagramLogo size={24} weight="duotone" />;
+      iconComponent = <InstagramLogo size={24} weight="duotone" />;
       break;
 
     case "twitch":
-      platformComponent = <TwitchLogo size={24} weight="duotone" />;
+      iconComponent = <TwitchLogo size={24} weight="duotone" />;
       break;
 
     case "reddit":
-      platformComponent = <RedditLogo size={24} weight="duotone" />;
+      iconComponent = <RedditLogo size={24} weight="duotone" />;
       break;
 
     case "chalkpad":
-      platformComponent = <Trash size={24} weight="duotone" />;
+      iconComponent = <Trash size={24} weight="duotone" />;
       break;
 
     case "monkeytype":
-      platformComponent = <Keyboard size={24} weight="duotone" />;
+      iconComponent = <Keyboard size={24} weight="duotone" />;
       break;
 
     case "gmail":
-      platformComponent = <Mailbox size={24} weight="duotone" />;
+      iconComponent = <Mailbox size={24} weight="duotone" />;
       break;
 
     case "leetcode":
-      platformComponent = <Code size={24} weight="duotone" />;
+      iconComponent = <Code size={24} weight="duotone" />;
       break;
 
-    case "neetcode":
-      platformComponent = <Code size={24} weight="duotone" />;
+    case "code":
+      iconComponent = <Code size={24} weight="duotone" />;
       break;
 
     case "hianime":
-      platformComponent = <Cat size={24} weight="duotone" />;
+      iconComponent = <Cat size={24} weight="duotone" />;
+      break;
+
+    case "trash":
+      iconComponent = <TrashSimple size={24} weight="duotone"/>;
       break;
 
     default:
-      platformComponent = null;
+      iconComponent = <Barn size={24} weight="duotone" />;
       break;
   }
-
   return (
-    <div className="flex flex-col items-center space-x-1 rounded-md shadow p-2 mt-6 bg-card text-card-foreground border hover:cursor-pointer">
-      <div className="w-full flex justify-center items-center">
-        {platformComponent}
-        <h1 className="px-2 text-sm sm:text-md font-semibold text-muted-foreground hover:cursor-pointer hover:text-foreground">
+    <div
+      className="w-full rounded-md border bg-card text-card-foreground shadow p-2 hover:cursor-pointer hover:bg-muted flex flex-row justify-between items-center"
+    >
+      <div
+        className="w-full flex flex-row items-center justify-between"
+        onClick={handleVisitPage}
+      >
+        {iconComponent}
+
+        <h1 className="px-2 text-md font-semibold text-muted-foreground hover:cursor-pointer text-center">
           {name}
         </h1>
       </div>
-      <div className="w-full flex mt-4 gap-4">
-        <Button
-          variant="outline"
-          size="sm"
-          className="flex-1"
-          onClick={handleVisitLandingPage}
-        >
-          Visit Landing Page
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          className="flex-1"
-          onClick={handleVisitProfilePage}
-        >
-          View Profile Page
-        </Button>
-      </div>
+      <TrashSimple
+        size={24}
+        className="hover:text-red-500"
+        onClick={handleDeleteTab}
+        weight="regular"
+      />
     </div>
   );
 }
